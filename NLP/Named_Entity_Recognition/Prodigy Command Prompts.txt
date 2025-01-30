@@ -1,0 +1,7 @@
+To annotate .txt file: python -m prodigy ner.manual ligand_screening en_core_web_sm "D:\Prodigy\ARTICLE_id.txt --label "ligand,chemical stability,thermodynamics,kinetics,loading capacity,operational condition range,solubility,dispersion numbers,phase disengagement"
+
+To train NER model: python -m prodigy data-to-spacy ligand_screening --ner ligand_screening THEN python -m spacy train ligand_screening/config.cfg --paths.train ligand_screening/train.spacy --paths.dev ligand_screening/dev.spacy 
+
+To get data file to use with other pre-trained models (i.e. hugging face): python -m prodigy db-out ligand_screening > ARTICLE_ID.jsonl D:\Prodigy
+
+To do relation extraction from NER labeled dataset: python -m prodigy rel.manual ligand_characteristics_relations blank:en "D:\Prodigy\ANLP_Files\ner_dataset.jsonl" --label ligand-chemical_stability,ligand-thermodynamics,ligand-kinetics,ligand-loading_capacity,ligand-operational_condition_range,ligand-solubility,ligand-dispersion_numbers,ligand-phase_disengagements,NO_RELATION --span-label ligand,chemical_stability,thermodynamics,solubility,dispersion_numbers,kinetics,operational_condition_range,loading_capacity,phase_disengagements --wrap
